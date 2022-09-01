@@ -1,0 +1,44 @@
+{
+	"pages": [
+    {
+       "path" : "pages/search/search"
+     },
+    {
+       "path":"pages/index/index"
+    },
+
+    {
+      "path":"pages/personal/personal"
+    },
+     {
+       "path":"pages/playMusic/playMusic"
+     }
+
+    ],
+  "tabBar": {
+      "color": "#bcbcbc",
+      "selectedColor": "#000000",
+      "backgroundColor": "#fffff",
+      "list": [
+        {
+          "pagePath": "pages/index/index",
+          "iconPath": "static/images/tabrs/tab-home.png",
+          "selectedIconPath": "static/images/tabrs/tab-home-current.png",
+          "text": "主页"
+        },
+        {
+          "pagePath": "pages/personal/personal",
+          "iconPath": "static/images/tabrs/tab-my.png",
+          "selectedIconPath": "static/images/tabrs/tab-my-current.png",
+          "text": "个人中心"
+        }
+      ]
+    },
+  
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "网易云音乐",
+		"navigationBarBackgroundColor": "#C20C0C",
+		"backgroundColor": "#F8F8F8"
+	}
+}

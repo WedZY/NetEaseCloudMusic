@@ -1,0 +1,136 @@
+/* 搜索框 */
+.u-search.data-v-57280228 {
+  padding: 5px 5px 0 5px;
+}
+/* 轮播图 */
+.bannerSwiper.data-v-57280228 {
+  padding: 20rpx;
+}
+/* 分段器 */
+.demo-layout.data-v-57280228 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 80px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+.demo-layout .bgColor.data-v-57280228 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 3px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 33, 66, 0.1);
+}
+.demo-layout .bgColor image.data-v-57280228 {
+  width: 80rpx;
+  height: 80rpx;
+}
+.demo-layout .today.data-v-57280228 {
+  font-size: 25rpx;
+  top: 40%;
+  position: absolute;
+  color: #fff;
+}
+.demo-layout .home_text.data-v-57280228 {
+  font-size: 25rpx;
+  color: darkgray;
+}
+/* 我喜欢的音乐 */
+.loveSongList.data-v-57280228 {
+  width: 100%;
+  padding: 0 50rpx 0 50rpx;
+  box-sizing: border-box;
+}
+.loveSongList .loveSongBox.data-v-57280228 {
+  height: 100%;
+  padding: 10rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 10rpx;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.loveSongList .loveSongBox .loveSong_Png.data-v-57280228 {
+  border-radius: 10rpx;
+  width: 110rpx;
+  height: 110rpx;
+}
+.loveSongList .loveSongBox .loveSongBoxRecord.data-v-57280228 {
+  display: flex;
+  flex-direction: column;
+}
+.loveSongList .loveSongBox .loveSongBoxRecord .recordLoveMusicText.data-v-57280228 {
+  height: 10rpx;
+  font-size: 20rpx;
+  color: gainsboro;
+}
+.loveSongList .loveSongBox .loveSongBoxRecord .recordLoveMusicText image.data-v-57280228 {
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 10rpx;
+}
+/*  歌单 */
+.content.data-v-57280228 {
+  width: 100%;
+  padding: 0 50rpx 30rpx 50rpx;
+  box-sizing: border-box;
+}
+.content .content-view.data-v-57280228 {
+  border-radius: 10rpx;
+  padding: 10rpx 20rpx 30rpx 20rpx;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.content .content-view .createdMusic_text.data-v-57280228 {
+  font-size: 20rpx;
+  color: #bbc3cb;
+}
+.content .content-view button.data-v-57280228::after {
+  border: none;
+}
+.content .content-view .muBtn.data-v-57280228 {
+  background-color: #4bff87;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 0;
+}
+.content .content-view .createdMusic_btn.data-v-57280228 {
+  display: flex;
+}
+.content .content-view .setMsuicBtn.data-v-57280228 {
+  display: flex;
+  justify-content: flex-end;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.content .songList .songListBox.data-v-57280228 {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.content .songList .songListBox image.data-v-57280228 {
+  border-radius: 10rpx;
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 25rpx;
+}
+.content .songList .songListBox .songListFontSmall.data-v-57280228 {
+  margin-top: 10rpx;
+  height: 10rpx;
+  font-size: 20rpx;
+  color: gainsboro;
+}
+.content .songList .songListBtn.data-v-57280228 {
+  display: flex;
+  margin-top: 20rpx;
+  justify-content: flex-end;
+}
+
