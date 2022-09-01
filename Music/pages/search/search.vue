@@ -79,13 +79,6 @@
       }
     },
     watch: {
-      searchHistoryRecord(newVal, oldVal) {
-        if (newVal.length == 0) {
-          this.show = false
-        } else {
-          this.show = true
-        }
-      },
       searchAdvices(newVal,oldVal){
         if(newVal===undefined){
           this.searchAdvices=[]
@@ -97,7 +90,9 @@
       valueSearch(newVal,oldVal){ 
        if(newVal==''){
          this.PromptSearchShow=false
-       }else{         
+         if(this.searchHistoryRecord.length===0)this.show=false
+       }else{
+           
             this.PromptSearchShow=true
             this.valueSearchPrompt=`搜索  "${newVal}"`
        }
@@ -105,8 +100,12 @@
     },
     created() {
       // 加载搜索记录
-      this.searchHistoryRecord = JSON.parse(uni.getStorageSync(this.serarchKey))
-      if (this.searchHistoryRecord.length == 0) this.show = false
+     if(uni.getStorageSync(this.serarchKey)===''){
+       this.show = false
+     }else{
+       this.searchHistoryRecord =JSON.parse(uni.getStorageSync(this.serarchKey))
+     }
+    if(this.searchHistoryRecord.length===0)this.show=false
     },
     methods: {
       change(res) {
@@ -131,7 +130,8 @@
       },
       // 保存搜索记历录方法
       saveSearchHistory() {
-        this.searchHistoryRecord = [...new Set([...this.searchHistoryRecord, this.valueSearch].reverse())];
+        this.searchHistoryRecord = [...new Set([...this.searchHistoryRecord, this.valueSearch].reverse())]
+        
         uni.setStorageSync(this.serarchKey, JSON.stringify(this.searchHistoryRecord))
         this.valueSearch = ''
       },
