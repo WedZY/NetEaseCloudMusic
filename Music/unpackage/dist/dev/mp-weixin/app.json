@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/search/search",
+    "pages/playMusic/playMusic",
     "pages/index/index",
-    "pages/personal/personal",
-    "pages/playMusic/playMusic"
+    "pages/personal/personal"
   ],
   "subPackages": [],
   "window": {
@@ -31,5 +31,6 @@
       }
     ]
   },
+  "permission": {},
   "usingComponents": {}
 }

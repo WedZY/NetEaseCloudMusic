@@ -1,83 +1,76 @@
 <template>
-  <view>
-    <view class="container">
-      <view class="bgTop">
-        <view class="bgTopImg"
-          style="background-image: url('../../static/images/playMusic/video_pic4.jpg')">
-        </view>
-      </view>
-      <view class="bgButtom" id="btn-3">
-        <view class="bgButtomImg"
-          style="background-image: url('../../static/images/playMusic/video_pic4.jpg')">
-        </view>
-      </view>
-    </view>
-    <view class="bgMiddle" id="btn-4">
-      <view class="bgMiddleImg"
-        style="background-image: url('../../static/images/playMusic/video_pic4.jpg')">
-      </view>
-    </view>
-    <view class="PlayButton">
+  <view class="body-view">
+    <image src="https://p2.music.126.net/dIf9N562jetyy8taVbo8rw==/109951163558960513.jpg" class="background-bg"></image>
 
-      <!--      <u-row customStyle="margin-bottom: 5px;margin-top: 15%;">
-        <u-col span="6">
-          <view class="demo-layout bg-purple-light"></view>
-        </u-col>
-        <u-col span="6">
-          <view class="demo-layout bg-purple"></view>
-        </u-col>
-      </u-row> -->
-      <!-- <u-row customStyle="margin-bottom: 5px">
-        <u-col span="4">
-          <view class="demo-layout bg-purple"></view>
-        </u-col>
-        <u-col span="4">
-          <view class="demo-layout bg-purple-light"></view>
-        </u-col>
-        <u-col span="4">
-          <view class="demo-layout bg-purple-dark"></view>
-        </u-col>
-      </u-row> -->
-      <u-row customStyle="margin-bottom: 10px;margin-top: 20%;">
-        <u-col>
-          <view class="demo-layout5 bg-purple-light">
-
-            <view>00:00</view>
-            <slider activeColor="rgba(255,255,255,.8)" background-color="rgba(255,255,255,.3)" block-size="12"
-              role="slider" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" min="0" class='slider_middle'>
-            </slider>
-            <view>00:00</view>
+    <!-- 顶部 名字 作者 -->
+    <view class="play-wrapper">
+      <u-row>
+        <u-col span="12">
+          <view class="Music_Info Music_name">
+            <text>偏爱</text>
           </view>
         </u-col>
       </u-row>
-      <u-row justify="space-between">
-        <u-col span="4">
-          <view class="demo-layout1 ">
-            <image class="bg-purple-Left bg-purple2" src="/static/images/playMusic/d0y.png" alt=""></image>
-          </view>
-        </u-col>
-        <u-col span="4">
-          <view class="demo-layout1 ">
-            <!-- 暂停播放 -->
-    <image v-if="isPlay" class="bg-purple-middle  bg-purple1" src="/static/images/playMusic/d0s.png" @click="handleToggleBGAudio()"
-     ></image>
-            <!-- 开始播放 -->
-            <image v-else class="bg-purple-middle  bg-purple1" src="/static/images/playMusic/d0q.png" @click="handleToggleBGAudio()" ></image>
-          </view>
-        </u-col>
-        <u-col span="4">
-          <view class="demo-layout1 ">
-            <image class="bg-purple-Right bg-purple2" src="/static/images/playMusic/d0k.png" alt=""></image>
+      <u-row>
+        <u-col span="12">
+          <view class="Music_Info Music_author">
+            <text>张金云</text>
           </view>
         </u-col>
       </u-row>
-
-
-
-
-      <!-- <img class="note_btn_pause_white" src="../../static/images/playMusic/note_btn_play.png" alt=""> -->
-      <!-- <video src="http://m7.music.126.net/20220828210219/f1acbe69d7dc48cddb5995f39fff59d1/ymusic/0fd6/4f65/43ed/a8772889f38dfcb91c04da915b301617.mp3" controls></video> -->
     </view>
+    <!-- 中间歌词和圆盘 -->
+    <view class="play_middle">
+    
+      <view>
+        <image :style="{'transform':(showAudio ? 'rotate(0eg)':'rotate(-45deg)')}" src="../../static/images/playMusic/play_stick.png" class="body-record"></image>
+      </view>
+      <view class="round-container"  >
+        <image src="../../static/images/playMusic/disk.png" mode="" class="round_img run" :style="{'animation-play-state':(showAudio ? 'running':'paused')}"></image>
+        <image src="https://p2.music.126.net/dIf9N562jetyy8taVbo8rw==/109951163558960513.jpg" class="singer-img run" :style="{'animation-play-state':(showAudio ? 'running':'paused')}"></image>
+      </view>
+    </view>
+    
+    
+    
+    
+    <!-- 底部控制按钮 -->
+    <view class="play-foot">
+      <view class="page-slider">
+        <view>00:00</view>
+        <slider activeColor='rgba(255,255,255,0.8)' backgroundColor='rgba(255,255,255,0.3)' block-size='12'
+          class="slider_middle"></slider>
+        <view>00:00</view>
+      </view>
+      <view class="play_suspend">
+        <u-row>
+          <u-col span="4">
+            <view class="AudioImg icon_playing">
+              <image src="../../static/images/playMusic/d0y.png" mode="" class="icon_play"></image>
+            </view>
+          </u-col>
+
+          <u-col span="4">
+            <view v-if="showAudio" class="AudioImg">
+              <image src="../../static/images/playMusic/d0q.png" mode="" class="img_play" @click="handleToggleBGAudio()"></image>
+            </view>
+            <view v-else class=" AudioImg">
+              <image src="../../static/images/playMusic/d0s.png" mode="" class="img_play" @click="handleToggleBGAudio()"></image>
+            </view>
+          </u-col>
+
+          <u-col span="4">
+            <view class=" AudioImg icon_playing">
+              <image src="../../static/images/playMusic/d0k.png" mode="" class="icon_play"></image>
+            </view>
+          </u-col>
+
+        </u-row>
+      </view>
+
+    </view>
+
+
   </view>
 
 </template>
@@ -87,15 +80,15 @@
     name: "palyMusic",
     data() {
       return {
-        isPlay: true //歌曲是否播放
+        showAudio: true, //歌曲是否播放
       }
     },
     methods: {
       handleToggleBGAudio() {
-        if(this.isPlay){
-        this.isPlay=false  
-        }else{
-          this.isPlay=true
+        if (this.showAudio) {
+          this.showAudio = false
+        } else {
+          this.showAudio = true
         }
       }
     }
@@ -103,149 +96,126 @@
 </script>
 
 <style lang="less" scoped>
-  page {
-    background-color: #3b3b3b;
-  }
-
-  .bg-purple1 {
-    width: 90rpx;
-    height: 90rpx;
-  }
-
-  .bg-purple2 {
-    width: 60rpx;
-    height: 60rpx;
-  }
-
-  .demo-layout5 {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 28rpx;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  .slider_middle {
-    width: 65%;
-  }
-
-  .demo-layout1 {
-    height: 5vh;
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .demo-layout {
-    height: 7vh;
-    border-radius: 4px;
-
-  }
-
-  .demo-layout2 {
-    height: 50rpx;
-  }
-
-  .bg-purple {
-    background: #CED7E1;
-  }
-
-  .bg-purple-light {
-    /* background: #e5e9f2; */
-  }
-
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-
-  .container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    padding: 5% auto;
-    text-align: center;
-    background-size: cover;
-  }
-
-  .bgTop {
+  .background-bg {
     position: fixed;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    width: 110%;
-    height: 100%;
-    z-index: 100;
-  }
-
-  .bgTopImg {
-    position: fixed;
-    filter: blur(10px);
-    width: 100%;
-    height: 30vh;
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    background-position: 50%;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-
-  .bgButtom {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 120%;
-    height: 100%;
-    z-index: 100;
-  }
-
-  .bgButtomImg {
-    position: fixed;
-    filter: blur(10px);
-    left: 0px;
-    bottom: 0px;
-    width: 120%;
-    height: 30vh;
-    background-position: 50%;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-
-  .bgMiddle,
-  .bgMiddleImg::after {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    bottom: 0;
     top: 0;
-  }
-
-  .bgMiddleImg {
-    height: calc(100vh * 0.45);
-    top: 27%;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .PlayButton {
-    position: fixed;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    height: 30vh;
-    z-index: 1000;
+    height: 100%;
+    filter: blur(60rpx) brightness(50%);
+     z-index: -1;
+    transform: scale(1.5);
   }
 
-  .note_btn_pause_white {
-    /*    width: 50px;
-    height: 50px;
-    bottom: 0; */
-    /* background-color: aqua; */
+  // 作者歌曲名字
+  .play-wrapper {
+    width: 100%;
+    padding: 20rpx;
+    box-sizing: border-box;
+
+    .Music_Info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .Music_name {
+      color: #fff;
+    }
+
+    .Music_author {
+      font-size: 24rpx;
+      margin-top: 10rpx;
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+ // 中间圆盘
+ .play_middle{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 816rpx;
+   box-sizing: border-box;
+   .body-record{
+     transform-origin:20% 12%;
+    transition: transform 0.8s ease 0s;
+     position: absolute;
+     width: 190rpx;
+     height: 270rpx;
+     top: 10%;
+     left: 45%;
+     z-index: 101;
+   }
+   .round-container{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 630rpx;
+     height: 630rpx;
+     .round_img{
+       position: absolute;
+       width: 530rpx;
+       height: 530rpx;
+       z-index: 100;
+     }
+     .singer-img{   
+       width: 480rpx;
+       height: 480rpx;
+       border-radius: 50%;
+     }  
+     .run{
+       animation:myRotate 20s linear infinite;
+       @keyframes myRotate {
+         0%{transform: rotate(0deg)}
+         25%{transform: rotate(90deg)}
+         50%{transform: rotate(180deg)}
+         75%{transform: rotate(270deg)}
+         100%{transform: rotate(360deg)}
+       }
+     }
+ 
+   }
+
+ }
+
+  //底部按钮
+  .play-foot {
+    position: fixed;
+    width: 750rpx;
+    height: 250rpx;
+    bottom: 0;
+
+    .page-slider {
+      display: flex;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 28rpx;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .slider_middle {
+      width: 65%;
+    }
+
+    .play_suspend {
+      .AudioImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .icon_play {
+          width: 80rpx;
+          height: 80rpx;
+        }
+
+        .img_play {
+          width: 100rpx;
+          height: 100rpx;
+        }
+      }
+    }
   }
 </style>

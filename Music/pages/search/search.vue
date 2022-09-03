@@ -16,7 +16,7 @@
         </u-row>
       </button>
     </view>
-<!-- 搜索建议 -->
+    <!-- 搜索建议 -->
     <view class="searchAdvice" v-for="(item,index) in searchAdvices" :key="index">
       <button class="searchAdviceBtn">
         <u-row>
@@ -32,7 +32,7 @@
       </button>
     </view>
 
-<!-- 搜索历史记录 -->
+    <!-- 搜索历史记录 -->
     <view v-if="show" class="searchHistory">
       <u-row>
         <u-col span="6">
@@ -73,48 +73,56 @@
         show: true,
         showPrompt: false, //提示框是否显示
         PromptSearchShow: false, //提示框是否显示
-        searchAdvices:[], //搜索建议
+        searchAdvices: [], //搜索建议
         searchResults: [], //搜索结果列表
         searchHistoryRecord: [], //存放搜索历史记录
       }
     },
     watch: {
-      searchAdvices(newVal,oldVal){
-        if(newVal===undefined){
-          this.searchAdvices=[]
-        }
-        if(newVal==''){
-          this.show=true
+      searchHistoryRecord(newVal, oldVal) {
+        if (newVal.length === 0) {
+          this.show = false
+        } else {
+          this.show = true
         }
       },
-      valueSearch(newVal,oldVal){ 
-       if(newVal==''){
-         this.PromptSearchShow=false
-         if(this.searchHistoryRecord.length===0)this.show=false
-       }else{
-           
-            this.PromptSearchShow=true
-            this.valueSearchPrompt=`搜索  "${newVal}"`
-       }
+      searchAdvices(newVal, oldVal) {
+        if (newVal === undefined) {
+          this.show = false
+          this.searchAdvices = []
+
+        }
+
+      },
+      valueSearch(newVal, oldVal) {
+        if (newVal == '') {
+          this.PromptSearchShow = false
+          if (this.searchHistoryRecord.length === 0) this.show = false
+        } else {
+          this.PromptSearchShow = true
+          this.valueSearchPrompt = `搜索  "${newVal}"`
+        }
       }
     },
     created() {
       // 加载搜索记录
-     if(uni.getStorageSync(this.serarchKey)===''){
-       this.show = false
-     }else{
-       this.searchHistoryRecord =JSON.parse(uni.getStorageSync(this.serarchKey))
-     }
-    if(this.searchHistoryRecord.length===0)this.show=false
+      if (uni.getStorageSync(this.serarchKey) === '') {
+        this.show = false
+      } else {
+        this.searchHistoryRecord = JSON.parse(uni.getStorageSync(this.serarchKey))
+      }
+      if (this.searchHistoryRecord.length === 0) this.show = false
     },
     methods: {
       change(res) {
-        if(this.valueSearch=='')this.searchAdvices=[]
+        if (this.valueSearch == '') {
+          this.searchAdvices = []
+        }
         api.getSearchAdvice(res).then(res => {
-         if(res.code===200){
-         this.searchAdvices=res.result.allMatch
-         this.show=false
-         }
+          if (res.code === 200) {
+            this.show = false
+            this.searchAdvices = res.result.allMatch
+          }
         })
       },
       HistoryRecord(index) {
@@ -131,7 +139,7 @@
       // 保存搜索记历录方法
       saveSearchHistory() {
         this.searchHistoryRecord = [...new Set([...this.searchHistoryRecord, this.valueSearch].reverse())]
-        
+
         uni.setStorageSync(this.serarchKey, JSON.stringify(this.searchHistoryRecord))
         this.valueSearch = ''
       },
@@ -172,31 +180,35 @@
   // 搜索建议
   .searchAdvice {
     background-color: #fff;
-    .searchAdviceBtn{
-      padding-left:20rpx ;
+
+    .searchAdviceBtn {
+      padding-left: 20rpx;
       padding-left: 0 !important;
       padding-right: 0 !important;
       margin-right: 0 !important;
       margin-left: 0 !important;
       border-radius: 0;
-      .searchAdviceicon{
+
+      .searchAdviceicon {
         display: flex;
         justify-content: center;
         align-items: center;
       }
     }
-    .searchAdviceText{
+
+    .searchAdviceText {
       font-size: 25rpx;
       border-bottom: 1rpx solid #e9eaec;
     }
-    .searchAdviceTextPrompt{
+
+    .searchAdviceTextPrompt {
       padding-left: 25rpx;
       color: #ff4757;
       font-size: 25rpx;
       border-bottom: 1rpx solid #e9eaec;
     }
   }
-  
+
 
   // 搜索历史
   .searchHistory {

@@ -1,128 +1,149 @@
-page.data-v-79a7ecac {
-  background-color: #3b3b3b;
+.background-bg.data-v-79a7ecac {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: blur(60rpx) brightness(50%);
+          filter: blur(60rpx) brightness(50%);
+  z-index: -1;
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
 }
-.bg-purple1.data-v-79a7ecac {
-  width: 90rpx;
-  height: 90rpx;
+.play-wrapper.data-v-79a7ecac {
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
 }
-.bg-purple2.data-v-79a7ecac {
-  width: 60rpx;
-  height: 60rpx;
-}
-.demo-layout5.data-v-79a7ecac {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 28rpx;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.slider_middle.data-v-79a7ecac {
-  width: 65%;
-}
-.demo-layout1.data-v-79a7ecac {
-  height: 5vh;
-  border-radius: 4px;
+.play-wrapper .Music_Info.data-v-79a7ecac {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.demo-layout.data-v-79a7ecac {
-  height: 7vh;
-  border-radius: 4px;
+.play-wrapper .Music_name.data-v-79a7ecac {
+  color: #fff;
 }
-.demo-layout2.data-v-79a7ecac {
-  height: 50rpx;
+.play-wrapper .Music_author.data-v-79a7ecac {
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  color: rgba(255, 255, 255, 0.3);
 }
-.bg-purple.data-v-79a7ecac {
-  background: #CED7E1;
-}
-.bg-purple-light.data-v-79a7ecac {
-  /* background: #e5e9f2; */
-}
-.bg-purple-dark.data-v-79a7ecac {
-  background: #99a9bf;
-}
-.container.data-v-79a7ecac {
+.play_middle.data-v-79a7ecac {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 100%;
-  position: relative;
-  padding: 5% auto;
-  text-align: center;
-  background-size: cover;
+  height: 816rpx;
+  box-sizing: border-box;
 }
-.bgTop.data-v-79a7ecac {
-  position: fixed;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  width: 110%;
-  height: 100%;
+.play_middle .body-record.data-v-79a7ecac {
+  -webkit-transform-origin: 20% 12%;
+          transform-origin: 20% 12%;
+  transition: -webkit-transform 0.8s ease 0s;
+  transition: transform 0.8s ease 0s;
+  transition: transform 0.8s ease 0s, -webkit-transform 0.8s ease 0s;
+  position: absolute;
+  width: 190rpx;
+  height: 270rpx;
+  top: 10%;
+  left: 45%;
+  z-index: 101;
+}
+.play_middle .round-container.data-v-79a7ecac {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 630rpx;
+  height: 630rpx;
+}
+.play_middle .round-container .round_img.data-v-79a7ecac {
+  position: absolute;
+  width: 530rpx;
+  height: 530rpx;
   z-index: 100;
 }
-.bgTopImg.data-v-79a7ecac {
-  position: fixed;
-  -webkit-filter: blur(10px);
-          filter: blur(10px);
-  width: 100%;
-  height: 30vh;
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  background-position: 50%;
-  background-size: cover;
-  background-attachment: fixed;
+.play_middle .round-container .singer-img.data-v-79a7ecac {
+  width: 480rpx;
+  height: 480rpx;
+  border-radius: 50%;
 }
-.bgButtom.data-v-79a7ecac {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 120%;
-  height: 100%;
-  z-index: 100;
+.play_middle .round-container .run.data-v-79a7ecac {
+  -webkit-animation: myRotate-data-v-79a7ecac 20s linear infinite;
+          animation: myRotate-data-v-79a7ecac 20s linear infinite;
 }
-.bgButtomImg.data-v-79a7ecac {
-  position: fixed;
-  -webkit-filter: blur(10px);
-          filter: blur(10px);
-  left: 0px;
-  bottom: 0px;
-  width: 120%;
-  height: 30vh;
-  background-position: 50%;
-  background-size: cover;
-  background-attachment: fixed;
+@-webkit-keyframes myRotate-data-v-79a7ecac {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
 }
-.bgMiddle.data-v-79a7ecac,
-.bgMiddleImg.data-v-79a7ecac::after {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+25% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+}
+50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+}
+75% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes myRotate-data-v-79a7ecac {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+25% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+}
+50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+}
+75% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+.play-foot.data-v-79a7ecac {
+  position: fixed;
+  width: 750rpx;
+  height: 250rpx;
   bottom: 0;
-  top: 0;
 }
-.bgMiddleImg.data-v-79a7ecac {
-  height: calc(100vh * 0.45);
-  top: 27%;
-  position: relative;
-  background-size: cover;
-  background-position: center;
+.play-foot .page-slider.data-v-79a7ecac {
+  display: flex;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 28rpx;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.PlayButton.data-v-79a7ecac {
-  position: fixed;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  width: 100%;
-  height: 30vh;
-  z-index: 1000;
+.play-foot .slider_middle.data-v-79a7ecac {
+  width: 65%;
 }
-.note_btn_pause_white.data-v-79a7ecac {
-  /*    width: 50px;
-  height: 50px;
-  bottom: 0; */
-  /* background-color: aqua; */
+.play-foot .play_suspend .AudioImg.data-v-79a7ecac {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.play-foot .play_suspend .AudioImg .icon_play.data-v-79a7ecac {
+  width: 80rpx;
+  height: 80rpx;
+}
+.play-foot .play_suspend .AudioImg .img_play.data-v-79a7ecac {
+  width: 100rpx;
+  height: 100rpx;
 }
 
