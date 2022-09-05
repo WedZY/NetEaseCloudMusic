@@ -27,7 +27,6 @@
     },
     watch: {
       showModal(val) {
-        console.log('子组件侦听到了',val)
         this.show = val
       }
     },

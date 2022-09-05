@@ -14,7 +14,15 @@ function getSearchAdvice(advice){
     method:'GET',
   })
 }
+// 全面搜索
+function getAllSearchMusic(MusicName,offset,pageSize){
+  return request({
+    url:`/cloudsearch?keywords=${MusicName}&type=1&offset=${offset}&limit=${pageSize}`,
+   method:'GET'    
+  })
+}
 export default{
 	getBanner,
   getSearchAdvice,
+  getAllSearchMusic,
 }

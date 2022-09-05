@@ -198,12 +198,12 @@
         ]
       }
     },
+
     created() {
       this.today = new Date().getDate()
       api.getBanner().then((res) => {
         if (res.code == 200) {
           this.banners = res.banners
-          console.log(this.banners, "qwe")
         }
       })
     },

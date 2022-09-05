@@ -321,7 +321,7 @@ $u-button-mini-min-width: 50px !default;
 $u-button-disabled-opacity: 0.5 !default;
 $u-button-info-color: #323233 !default;
 $u-button-info-background-color: #fff !default;
-$u-button-info-border-color: #ebedf0 !default;
+$u-button-info-border-color: #fff !default;
 $u-button-info-border-width: 1px !default;
 $u-button-info-border-style: solid !default;
 $u-button-success-color: #fff !default;
@@ -361,7 +361,7 @@ $u-button-hairline-border-width: 0.5px !default;
     height: $u-button-u-button-height;
     position: relative;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     @include flex;
     /* #ifndef APP-NVUE */
     box-sizing: border-box;

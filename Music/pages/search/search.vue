@@ -2,11 +2,11 @@
   <view>
     <view class="searchTabr">
       <u-search shape="round" placeholder="搜索歌曲关键词" :clearabled="true" v-model="valueSearch" actionText="搜索"
-        @custom='SaveHistory()' @change="change"></u-search>
+        @custom='click()' @change="change"></u-search>
     </view>
     <!-- 搜索建议提示 -->
     <view v-if="PromptSearchShow" class="searchAdvice">
-      <button class="searchAdviceBtn">
+      <button class="searchAdviceBtn" @click="searchToPage" >
         <u-row>
           <u-col span="12">
             <view class="searchAdviceTextPrompt">
@@ -18,7 +18,7 @@
     </view>
     <!-- 搜索建议 -->
     <view class="searchAdvice" v-for="(item,index) in searchAdvices" :key="index">
-      <button class="searchAdviceBtn">
+      <button class="searchAdviceBtn" @click="toPage(item.keyword)">
         <u-row>
           <u-col span="1">
             <view class="searchAdviceicon">
@@ -70,7 +70,7 @@
         valueSearch: "",
         valueSearchPrompt: "",
         serarchKey: '5pif5pyf5LiJ',
-        show: true,
+        show: false,
         showPrompt: false, //提示框是否显示
         PromptSearchShow: false, //提示框是否显示
         searchAdvices: [], //搜索建议
@@ -90,20 +90,26 @@
         if (newVal === undefined) {
           this.show = false
           this.searchAdvices = []
-
         }
 
       },
       valueSearch(newVal, oldVal) {
         if (newVal == '') {
           this.PromptSearchShow = false
-          if (this.searchHistoryRecord.length === 0) this.show = false
+          if (this.searchHistoryRecord.length === 0) {
+            this.show = false
+          } else {
+            this.show = true
+          }
+
         } else {
           this.PromptSearchShow = true
           this.valueSearchPrompt = `搜索  "${newVal}"`
         }
-      }
+    
+      },
     },
+
     created() {
       // 加载搜索记录
       if (uni.getStorageSync(this.serarchKey) === '') {
@@ -114,7 +120,22 @@
       if (this.searchHistoryRecord.length === 0) this.show = false
     },
     methods: {
+      searchToPage(){
+        this.toPage(this.valueSearch)
+      },
+      toPage(res) {
+        console.log(res);
+        uni.navigateTo({
+          url: `/pages/searchResults/searchResults?name=${res}`,
+        })
+        this.valueSearch=res
+        this.searchHistoryRecord = [...this.searchHistoryRecord,  this.valueSearch]
+        this.saveSearchHistory()
+
+      },
       change(res) {
+        // 搜索的关键字标上颜色
+
         if (this.valueSearch == '') {
           this.searchAdvices = []
         }
@@ -122,15 +143,20 @@
           if (res.code === 200) {
             this.show = false
             this.searchAdvices = res.result.allMatch
+
           }
         })
+        
+        
+
+
       },
       HistoryRecord(index) {
         this.valueSearch = this.searchHistoryRecord[index]
       },
-      //保存关键词
-      SaveHistory(val) {
-        if (!(val === '')) {
+
+      click(val) {
+        if (val != '') {
           this.valueSearch = val
           this.searchHistoryRecord = [...this.searchHistoryRecord, this.valueSearch]
           this.saveSearchHistory()
@@ -139,13 +165,11 @@
       // 保存搜索记历录方法
       saveSearchHistory() {
         this.searchHistoryRecord = [...new Set([...this.searchHistoryRecord, this.valueSearch].reverse())]
-
         uni.setStorageSync(this.serarchKey, JSON.stringify(this.searchHistoryRecord))
         this.valueSearch = ''
       },
       // 调用子组件
       clearHistory() {
-
         this.showPrompt = true
       },
       // 清楚本地搜索记录
@@ -158,16 +182,12 @@
       },
       cancel(show) {
         this.showPrompt = show
-      }
+      },
     }
   }
 </script>
 
 <style lang="less">
-  page {
-    // background-color: #f1f2f6;
-  }
-
   .searchTabr {
     background-color: #fff;
     padding: 25rpx 10rpx;

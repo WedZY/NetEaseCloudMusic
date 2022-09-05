@@ -4,6 +4,9 @@
        "path" : "pages/search/search"
      },
     {
+      "path":"pages/searchResults/searchResults"
+    },
+    {
       "path":"pages/playMusic/playMusic"
     },
     {
