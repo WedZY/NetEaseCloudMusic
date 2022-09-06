@@ -13,20 +13,32 @@
         </view>
       </u-button>
 
-      <view class="playBtnList" v-for="(item,index) in searchRestultsList" :key="index">
+      <view class="playBtnList" v-for="(item,index) in searchRestultsLists" :key="index">
         <u-button hairline="false" :customStyle="customStyles">
-          <view>
+          <view class="BtnBox">
             <u-row>
               <u-col span="12">
-                <view class="playtext" v-html="item.name">
+                <view class="playtext" v-html="searchRestultsNames[index]">
                 </view>
-                <view class="playtext2" v-html="show[index]">
+                <view class="playtextChildbox">
+                                 <image v-if="item.privilege.plLevel=='none'" style="width: 38rpx; height: 25rpx;" src="../../static/images/searchRestults/em6.png"
+                    class="palyimg"></image>
+                 <image v-if="item.privilege.plLevel=='none'" style="width: 43rpx; height: 26rpx;" src="../../static/images/searchRestults/em2.png"
+                    class="palyimg"></image>
+                    <image v-if="item.originCoverType==1" style="width: 43rpx; height: 26rpx;" src="../../static/images/searchRestults/els.png"
+                      class="palyimg"></image>
+                      
+                  <image v-if="item.privilege.maxBrLevel=='hires'" style="width: 54rpx; height: 25rpx;" src="../../static/images/searchRestults/elh.png"
+                    class="palyimg"></image>
+                                   <image v-if="item.privilege.maxBrLevel=='lossless'" style="width: 35rpx; height: 26rpx;" src="../../static/images/searchRestults/em0.png"
+                    class="palyimg"></image>
+                  <view class="playtext2" v-html="authorVersion[index]">
+                  </view>
                 </view>
                 <view v-for="(first,index) in item.alia" :key='index'>
                   <text class="playtext2 provenance">{{first}}</text>
                 </view>
               </u-col>
-
             </u-row>
           </view>
         </u-button>
@@ -43,18 +55,25 @@
     data() {
       return {
         valueSearch: '',
+        searchRestultsLists: [],
         searchRestultsList: [],
+        searchRestultsName: [],
+        searchRestultsNames: [],
         authorVersion: [], //作者名字加版本
+        author: [], //作者名字加版本
         cun: [],
-        show:[],
-        char: '',
+        show: [],
+        char: 0,
+        nums:1,
+        num: '',
         pageSize: 30,
         pageNum: 1,
         offset: 0,
-        customStyles: {
+        customStyles: { //u-button按键样式
           height: 'auto',
           border: 'none',
-          padding:'20rpx',
+          padding: '20rpx',
+          overflow: 'hidden', //超出的文本隐藏
         }
       }
     },
@@ -70,49 +89,52 @@
       getorderList(name, offset, size) {
         api.getAllSearchMusic(name, offset, size).then(res => {
           if (res.code = 200) {
-            this.searchRestultsList = [...this.searchRestultsList, ...res.result.songs];
-            this.cun=[...this.cun,this.valueSearch]
-             this.cun.forEach(data => {
+            this.searchRestultsLists = [...this.searchRestultsLists, ...res.result.songs];
+
+            this.searchRestultsList = res.result.songs;
+            this.valueSearch.split('').forEach(data => {
               let hightStr = `<span style="color:#71afe5">${data}</span>`
               let str = new RegExp(data, 'gi')
-              this.searchRestultsList.forEach(items => {
-                items.name = items.name.replace(str, hightStr)
-                items.ar.forEach(item => {
-                  const authorversion = item.name + ' - ' + items.al.name
-                  this.authorVersion = [...new Set([...this.authorVersion, authorversion])]
+              this.searchRestultsList.forEach(item => {
+                //存储名字
+                if (item.tns === undefined) {
+                  item.name=item.name.replace(str,hightStr)
+                  this.searchRestultsName = [...this.searchRestultsName, item.name]
+             } else {
+                  item.tns.forEach(items => {
+                     item.name=item.name.replace(str,hightStr)
+                    const name = item.name + '(' + items + ')'
+                    this.searchRestultsName = [...this.searchRestultsName, name]
+
+                  })
+                }
+                //歌唱者+版本
+                item.ar.forEach(items => {
+                  if (this.char == 0) {
+                      items.name=items.name.replace(str,hightStr)
+                    this.num += items.name
+                    this.char++
+                  } else {
+                    items.name=items.name.replace(str,hightStr)
+                    this.num += '/' + items.name
+                  }
                 })
-                items.alia.forEach(itemchilds => {
-                  itemchilds = itemchilds.replace(str, hightStr)
-                })
+              item.al.name=item.al.name.replace(str,hightStr)
+                this.num += ' - ' + item.al.name
+                this.author = [...this.author, this.num]
+                this.num = ''
+                this.char = 0
               })
-                this.authorVersion.forEach(item=>{
-                item=item.replace(str,hightStr)
-                this.show=[...this.show,item]
-              })
+              if(this.nums!=this.valueSearch.split('').length){
+                this.searchRestultsName=[]
+                this.author=[]
+                this.nums++;
+              }else{
+                this.searchRestultsNames=[...this.searchRestultsNames,...this.searchRestultsName]
+                this.authorVersion=[...this.authorVersion,...this.author]
+              }
             })
-
-
-
-
-
-            // this.valueSearch.split('').forEach(data=>{
-            //   this.searchRestultsList.forEach(item=>{
-            //     let hightStr=`<span style="color:#71afe5">${data}</span>`
-            //     let str=new RegExp(data,'gi')
-            //     item.name=item.name.replace(str,hightStr)
-            //     item.al.name=item.al.name.replace(str,hightStr)
-            //     item.ar.forEach(itemchild=>{
-            //       let hightStrChild=`<span style="color:#c7e0f4">${data}</span>`
-            //       let strchild=new RegExp(data,'gi')
-            //       itemchild.name=itemchild.name.replace(strchild,hightStrChild)
-            //     })
-            //     item.alia.forEach(itemchilds=>{
-            //       let hightStrChilds=`<span style="color:#c7e0f4">${data}</span>`
-            //       let strchilds=new RegExp(data,'gi')
-            //       itemchilds=itemchilds.replace(strchilds,hightStrChilds)
-            //     })
-            //   })
-            // }) 
+            this.nums=1;//重置
           }
         })
       },
@@ -123,13 +145,15 @@
         })
       },
       onReachBottom() {
-        if (this.pageNum * this.pageSize == this.searchRestultsList.length) {
-          this.offset = this.pageNum * this.pageSize //偏移量增加
+        this.cun = [];
+        this.show = [];
+        if (this.pageNum * this.pageSize == this.searchRestultsLists.length) {
+          this.offset = this.pageNum * this.pageSize //偏移量增加 
           this.getorderList(this.valueSearch, this.offset, this.pageSize)
           this.pageNum += 1 //页数加+1
         } else {
           uni.showLoading({
-           	title: '已经到底啦'
+            title: '已经到底啦'
           });
 
           setTimeout(function() {
@@ -145,7 +169,6 @@
   .searchTabr {
     font-weight: lighter;
     box-sizing: border-box;
-
     .searchHead {
       padding: 25rpx 10rpx;
     }
@@ -167,17 +190,42 @@
         width: 100%;
         box-sizing: border-box;
 
-        .playtext {
-          color: #3b3a39;
-          
-        }
+        .BtnBox {
+              width: 80%;
+              box-sizing: border-box;
+          .playtext {     
+              overflow : hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              word-break: break-all;
+            color: #3b3a39;
+          }
 
-        .playtext2 {
-          color: #dfe4ea;
-          margin: 5rpx;
-          font-size: 20rpx;
+          .playtextChildbox {
+            display: flex;
+            align-items: center;
+
+            .palyimg {
+              margin: 10rpx 0 10rpx 10rpx;
+            }
+          }
+
+          .playtext2 {
+            color: #dfe4ea;
+            margin: 5rpx;
+            font-size: 20rpx;
+            overflow : hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            word-break: break-all;
+          }
         }
       }
+
 
     }
 
