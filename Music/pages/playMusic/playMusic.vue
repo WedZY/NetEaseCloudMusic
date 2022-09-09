@@ -83,6 +83,9 @@
         showAudio: true, //歌曲是否播放
       }
     },
+    onLoad:function(options) {
+      console.log(options)
+    },
     methods: {
       handleToggleBGAudio() {
         if (this.showAudio) {
@@ -140,7 +143,7 @@
    height: 816rpx;
    box-sizing: border-box;
    .body-record{
-     transform-origin:20% 12%;
+     transform-origin:21.5% 12%;
     transition: transform 0.8s ease 0s;
      position: absolute;
      width: 190rpx;

@@ -39,8 +39,8 @@
   box-sizing: border-box;
 }
 .play_middle .body-record.data-v-79a7ecac {
-  -webkit-transform-origin: 20% 12%;
-          transform-origin: 20% 12%;
+  -webkit-transform-origin: 21.5% 12%;
+          transform-origin: 21.5% 12%;
   transition: -webkit-transform 0.8s ease 0s;
   transition: transform 0.8s ease 0s;
   transition: transform 0.8s ease 0s, -webkit-transform 0.8s ease 0s;

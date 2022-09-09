@@ -1,9 +1,11 @@
 {
   "usingComponents": {
     "u-search": "/uni_modules/uview-ui/components/u-search/u-search",
+    "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast",
     "u-row": "/uni_modules/uview-ui/components/u-row/u-row",
     "u-col": "/uni_modules/uview-ui/components/u-col/u-col",
     "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
     "modal-prompt": "/components/modal/Modal"
   }
 }

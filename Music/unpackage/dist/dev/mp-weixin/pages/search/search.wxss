@@ -68,4 +68,42 @@ button::after {
   border-radius: 15rpx;
   background-color: #f1f2f6;
 }
+.playBtnList {
+  width: 100%;
+  font-weight: lighter;
+  box-sizing: border-box;
+}
+.playAllBtnImg {
+  display: flex;
+  align-items: center;
+  font-weight: lighter;
+}
+.playAllBtnImg .playBtn {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 15rpx;
+}
+.col_box {
+  box-sizing: border-box;
+  width: 100%;
+}
+.col_box .musicNamebox {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.col_box .showAuthorityImgBtn {
+  display: flex;
+  color: #dfe4ea;
+  margin: 5rpx;
+  font-size: 20rpx;
+}
+.col_box .showAuthorityImgBtn .musname {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.col_box .musicAuthor {
+  color: #dfe4ea;
+  margin: 5rpx;
+  font-size: 20rpx;
+}
 
