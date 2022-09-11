@@ -65,8 +65,7 @@
         </view>
       </u-button>
       <view class="playBtnList" v-for="(item,index) in searchResults" :key="index">
-        <u-button :customStyle="customStyles">
-
+        <u-button :customStyle="customStyles" @click="toPlay(item)">
           <u-row>
             <u-col span="12">
               <view class="col_box">
@@ -93,7 +92,7 @@
                     <span>{{items.name}}</span>
                     <span v-show="index<item.ar.length-1">/</span>
                   </view>
-                  <view class="musname">
+                 <view class="musname">
                   <span>-</span>
                   <span>{{item.al.name}}</span></view>
                 </view>
@@ -137,7 +136,8 @@
           height: 'auto',
           border: 'none',
           padding: '15rpx',
-        }
+        },
+        musicName:'',
       }
     },
     watch: {
@@ -192,6 +192,7 @@
           }
         })
       },
+      
       HistoryRecord(index) {
         this.valueSearch = this.searchHistoryRecord[index]
       },
@@ -226,6 +227,19 @@
       saveSearchHistory() {
         this.searchHistoryRecord = [...new Set([...this.searchHistoryRecord, this.valueSearch].reverse())]
         uni.setStorageSync(this.serarchKey, JSON.stringify(this.searchHistoryRecord))
+      },
+      
+      //跳转到播放页面 
+      toPlay(res){
+        let char=[]
+       res.ar.forEach(item=>{
+         char=[...char,item.name]
+       })
+       char=char.join('/')
+       console.log(res.al.picUrl);
+       uni.navigateTo({
+         url:`/pages/playMusic/playMusic?id=${res.id}&name=${res.name}&musicName=${char}&img=${res.al.picUrl}`
+       })
       },
       // 调用子组件
       clearHistory() {

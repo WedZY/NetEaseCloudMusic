@@ -32,6 +32,8 @@
       }
     ]
   },
-  "permission": {},
+  "requiredBackgroundModes": [
+    "audio"
+  ],
   "usingComponents": {}
 }

@@ -88,12 +88,11 @@ button::after {
   width: 100%;
 }
 .col_box .musicNamebox {
-  text-overflow: ellipsis;
-  overflow: hidden;
+  display: flex;
 }
 .col_box .showAuthorityImgBtn {
   display: flex;
-  color: #dfe4ea;
+  color: #d5dadf;
   margin: 5rpx;
   font-size: 20rpx;
 }
@@ -102,7 +101,7 @@ button::after {
   overflow: hidden;
 }
 .col_box .musicAuthor {
-  color: #dfe4ea;
+  color: #d5dadf;
   margin: 5rpx;
   font-size: 20rpx;
 }

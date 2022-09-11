@@ -1,38 +1,34 @@
 <template>
   <view class="body-view">
-    <image src="https://p2.music.126.net/dIf9N562jetyy8taVbo8rw==/109951163558960513.jpg" class="background-bg"></image>
+    <image :src='bgimg' class="background-bg"></image>
 
     <!-- 顶部 名字 作者 -->
     <view class="play-wrapper">
       <u-row>
         <u-col span="12">
           <view class="Music_Info Music_name">
-            <text>偏爱</text>
+          <text>{{name}}</text>
           </view>
         </u-col>
       </u-row>
       <u-row>
         <u-col span="12">
           <view class="Music_Info Music_author">
-            <text>张金云</text>
+            <text>{{musicName}}</text>
           </view>
         </u-col>
       </u-row>
     </view>
     <!-- 中间歌词和圆盘 -->
-    <view class="play_middle">
-    
+    <view class="play_middle">  
       <view>
         <image :style="{'transform':(showAudio ? 'rotate(0eg)':'rotate(-45deg)')}" src="../../static/images/playMusic/play_stick.png" class="body-record"></image>
       </view>
       <view class="round-container"  >
         <image src="../../static/images/playMusic/disk.png" mode="" class="round_img run" :style="{'animation-play-state':(showAudio ? 'running':'paused')}"></image>
-        <image src="https://p2.music.126.net/dIf9N562jetyy8taVbo8rw==/109951163558960513.jpg" class="singer-img run" :style="{'animation-play-state':(showAudio ? 'running':'paused')}"></image>
+        <image :src="bgimg" class="singer-img run" :style="{'animation-play-state':(showAudio ? 'running':'paused')}"></image>
       </view>
     </view>
-    
-    
-    
     
     <!-- 底部控制按钮 -->
     <view class="play-foot">
@@ -58,47 +54,74 @@
               <image src="../../static/images/playMusic/d0s.png" mode="" class="img_play" @click="handleToggleBGAudio()"></image>
             </view>
           </u-col>
-
+          
           <u-col span="4">
             <view class=" AudioImg icon_playing">
               <image src="../../static/images/playMusic/d0k.png" mode="" class="icon_play"></image>
             </view>
           </u-col>
-
         </u-row>
       </view>
-
     </view>
-
-
   </view>
 
 </template>
 
 <script>
+  import api from '../../common/api.js'
+  import formatDate from '../../utils/utils.js'
   export default {
     name: "palyMusic",
     data() {
       return {
         showAudio: true, //歌曲是否播放
+        bgimg:'',//背景图片
+        
+        name:'',//音乐名字
+        musicName:'',//唱歌人
+        totalProcessNum:0,//总音乐时间
+        startTime:0,//开始时间
+        endTime:0,//结束时间
+        playingTime:0,//正在播放时间
+      }
+    },
+    watch:{
+      // 监听是否暂停
+      showAudio(newVal,Oldval){
+        newVal?this.$innerAudioContext.play():this.$innerAudioContext.pause() 
       }
     },
     onLoad:function(options) {
-      console.log(options)
+      this.name=options.name
+      this.musicName=options.musicName
+      this.bgimg=options.img
+      // this.getMusicUrl(options.id)
+       
+      this.$bgAudioMannager.title = '我的标题';
+      this.$bgAudioMannager.src = `https://music.163.com/song/media/outer/url?id=${options.id}.mp3`;
+      formatDate.formatSecond(this.$bgAudioMannager.duration)
+
     },
     methods: {
+      // 获取音乐url
+      getMusicUrl(id){
+        api.getMusicUrl(id).then(request=>{
+         if(request.code==200){
+           this.$innerAudioContext.src=request.data[0].url
+           this.$innerAudioContext.autoplay=true //自动播放
+           this.$innerAudioContext.play() //开始播放
+         }
+        })
+      },
+      // 播放图标切换
       handleToggleBGAudio() {
-        if (this.showAudio) {
-          this.showAudio = false
-        } else {
-          this.showAudio = true
-        }
+        this.showAudio=!this.showAudio                 
       }
     }
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .background-bg {
     position: fixed;
     top: 0;
@@ -108,7 +131,7 @@
     width: 100%;
     height: 100%;
     filter: blur(60rpx) brightness(50%);
-     z-index: -1;
+    z-index: -1;
     transform: scale(1.5);
   }
 
@@ -197,6 +220,7 @@
       font-size: 28rpx;
       justify-content: space-evenly;
       align-items: center;
+      
     }
 
     .slider_middle {

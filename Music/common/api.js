@@ -21,8 +21,15 @@ function getAllSearchMusic(MusicName,offset,pageSize){
    method:'GET'    
   })
 }
+// 获取音乐url
+function getMusicUrl(id){
+  return request({
+    url:`/song/url?id=${id}`
+  })
+}
 export default{
 	getBanner,
   getSearchAdvice,
   getAllSearchMusic,
+  getMusicUrl,
 }
