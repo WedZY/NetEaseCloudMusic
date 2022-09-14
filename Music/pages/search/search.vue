@@ -110,11 +110,13 @@
 <script>
   import ModalPrompt from '../../components/modal/Modal.vue'
   import api from '../../common/api.js'
+  import{mapState,mapMutations} from'vuex'
   export default {
     name: "serach",
     components: {
       ModalPrompt
     },
+  computed:{},
     data() {
       return {
         valueSearch: "",
@@ -173,6 +175,7 @@
       }
     },
     methods: {
+      ...mapMutations(['SET_BACKGROUND_IMG']),
       searchToPage() {
         this.toPage(this.valueSearch)
       },
@@ -231,14 +234,16 @@
       
       //跳转到播放页面 
       toPlay(res){
-        let char=[]
-       res.ar.forEach(item=>{
-         char=[...char,item.name]
+        this.$store.commit('SET_BACKGROUND_IMG',{
+          img:res.al.picUrl
+        })
+         let singer=[]
+         res.ar.forEach(item=>{
+         singer=[...singer,item.name]
        })
-       char=char.join('/')
-       console.log(res.al.picUrl);
+       singer=singer.join('/')
        uni.navigateTo({
-         url:`/pages/playMusic/playMusic?id=${res.id}&name=${res.name}&musicName=${char}&img=${res.al.picUrl}`
+         url:`/pages/playMusic/playMusic?id=${res.id}&musicName=${res.name}&singerName=${singer}`
        })
       },
       // 调用子组件

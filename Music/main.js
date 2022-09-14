@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import uView from '@/uni_modules/uview-ui'
+import store from '@/store/index.js'
 
 // 引入请求封装
 Vue.use(uView)
@@ -17,6 +18,7 @@ App.mpType = 'app'
 
 const app = new Vue({
     ...App,
+    store
 })
 app.$mount()
 // #endif

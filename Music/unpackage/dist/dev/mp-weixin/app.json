@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/search/search",
-    "pages/searchResults/searchResults",
     "pages/playMusic/playMusic",
     "pages/index/index",
+    "pages/searchResults/searchResults",
     "pages/personal/personal"
   ],
   "subPackages": [],
@@ -11,7 +11,8 @@
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "网易云音乐",
     "navigationBarBackgroundColor": "#C20C0C",
-    "backgroundColor": "#F8F8F8"
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "color": "#bcbcbc",
@@ -33,7 +34,8 @@
     ]
   },
   "requiredBackgroundModes": [
-    "audio"
+    "audio",
+    "location"
   ],
   "usingComponents": {}
 }

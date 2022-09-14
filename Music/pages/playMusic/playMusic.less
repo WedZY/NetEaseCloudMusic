@@ -1,0 +1,129 @@
+.body-view{
+  width: 100%;
+  height: 100%;
+}
+//背景图片
+  .background-bg{
+     position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(60rpx) brightness(50%);
+    transform: scale(1.5);
+    z-index: -1;
+  }
+  //header 
+.play-wrapper{
+  height: 12%;
+  padding: 10rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+ .Music_name{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin-right: 50rpx;
+   .musicname{
+     margin-top:10rpx;
+     color:#efefef
+   }
+   .singerName{
+     margin-top:5rpx;
+     font-size:25rpx;
+     color: rgba(255, 255, 255, 0.3);
+   }
+ }
+}
+//middle
+.play_middle{
+  height: 68%;
+  box-sizing: border-box;
+  overflow: hidden;
+ .Scoop{
+   position:absolute;
+   top: 12%;
+   left: 45%;
+   height:300rpx;
+   z-index: 10001;
+   .body-record{
+    transform-origin:18% 10%;
+    transition: transform 0.8s ease 0s;
+     height: 300rpx;
+     width: 220rpx;
+    }
+  }
+.round-container{
+position:absolute;
+left: 15%;
+top: 23%;
+    .round_img{
+      height: 520rpx;
+      width: 520rpx;
+    }
+    .singer-img{
+     position: absolute;
+      border-radius: 50%;
+      height: 420rpx;
+      width: 420rpx;
+      top: 50rpx;
+      left: 12%;
+      z-index: -1;
+    }
+   }
+
+}
+
+// <!-- 底部控制按钮 -->
+ .play-foot {
+   height: 20%;
+    position: fixed;
+    width: 750rpx;
+    height: 250rpx;
+    bottom: 0;
+    .page-slider {
+      display: flex;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 28rpx;
+      justify-content: space-evenly;
+      align-items: center;
+      
+    }
+    .slider_middle {
+      width: 65%;
+    }
+    .play_suspend {
+      .AudioImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .icon_play {
+          width: 80rpx;
+          height: 80rpx;
+        }
+
+        .img_play {
+          width: 100rpx;
+          height: 100rpx;
+        }
+      }
+    }
+  }
+     .run{
+       animation:myRotate 20s linear infinite;
+       @keyframes myRotate {
+         0%{transform: rotate(0deg)}
+         25%{transform: rotate(90deg)}
+         50%{transform: rotate(180deg)}
+         75%{transform: rotate(270deg)}
+         100%{transform: rotate(360deg)}
+       }
+     }
+

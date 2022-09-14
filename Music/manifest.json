@@ -51,7 +51,7 @@
     "mp-weixin" : {
         /* 小程序特有相关 */
         "appid" : "wxf953f3c615623923",
-        "requiredBackgroundModes": ["audio"],
+        "requiredBackgroundModes": ["audio","location"],
         "setting" : {
             "urlCheck" : false,
             "es6" : true,

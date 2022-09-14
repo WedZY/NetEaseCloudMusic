@@ -1,0 +1,1 @@
+export const SET_BACKGROUND_IMG='SET_BACKGROUND_IMG'  //设置背景图片
