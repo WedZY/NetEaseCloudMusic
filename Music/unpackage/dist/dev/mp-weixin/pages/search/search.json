@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "u-sticky": "/uni_modules/uview-ui/components/u-sticky/u-sticky",
     "u-search": "/uni_modules/uview-ui/components/u-search/u-search",
     "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast",
     "u-row": "/uni_modules/uview-ui/components/u-row/u-row",

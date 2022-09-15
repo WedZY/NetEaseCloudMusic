@@ -38,25 +38,43 @@
       <view class="play_suspend">
         <u-row>
           <u-col span="4">
-            <view class="AudioImg icon_playing">
-              <image src="../../static/images/playMusic/d0y.png" mode="" class="icon_play"></image>
-            </view>
+                <u-row>
+                  <u-col span="8"> 
+                      <view class="RightLast">
+                  <image src="../../static/images/playMusic/d1a.png" class="icon_play" style="width: 70rpx;height: 70rpx;"></image>
+                   </view>
+                  </u-col>
+                  <u-col span="4">
+                    <view class="RightLast">
+                      <image src="../../static/images/playMusic/d1q.png" class="icon_play"></image>
+                    </view>
+                  </u-col>
+                </u-row>
           </u-col>
           <u-col span="4">
-            <view v-if="showAudio" class="AudioImg">
-              <image src="../../static/images/playMusic/d0q.png" mode="" class="img_play"
+           <view v-if="showAudio" class="RightLast middle">
+              <image src="../../static/images/playMusic/d1l.png" class="img_play"
                 @click="handleToggleBGAudio()"></image>
             </view>
-            <view v-else class=" AudioImg">
-              <image src="../../static/images/playMusic/d0s.png" mode="" class="img_play"
+            <view v-else class="RightLast middle">
+              <image src="../../static/images/playMusic/d1n.png" class="img_play"
                 @click="handleToggleBGAudio()"></image>
             </view>
           </u-col>
 
-          <u-col span="4">
-            <view class=" AudioImg icon_playing">
-              <image src="../../static/images/playMusic/d0k.png" mode="" class="icon_play"></image>
-            </view>
+          <u-col span="4">            
+            <u-row>
+              <u-col span="4">
+                <view class="RightLast">
+                  <image src="../../static/images/playMusic/d1f.png" class="icon_play"></image>
+                </view>
+              </u-col>
+              <u-col span="8">
+                  <view class="RightLast">
+                 <image src="../../static/images/playMusic/d1d.png" class="icon_play"></image>
+               </view>
+              </u-col>
+            </u-row>
           </u-col>
         </u-row>
       </view>
@@ -75,6 +93,7 @@
     name: "palyMusic",
     data() {
       return {
+        stateImgList:['../../static/images/playMusic/d1a.png','../../static/images/playMusic/d0n.png','../../static/images/playMusic/d1s.png'],
         showAudio: true, //歌曲是否播放
         sliderValue:0,//滑块当前值
         musicName: '', //音乐名字

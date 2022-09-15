@@ -1,11 +1,14 @@
 <template>
   <view>
-    <view class="searchTabr">
-      <u-search shape="round" placeholder="搜索歌曲关键词" :clearabled="true" v-model="valueSearch" actionText="搜索"
-        @custom='search()' @change="change"></u-search>
-      <!-- 没有输入搜索内容就提示 -->
-      <u-toast ref="uToast"></u-toast>
-    </view>
+    <u-sticky>
+      <view class="searchTabr">
+        <u-search shape="round" placeholder="搜索歌曲关键词" :clearabled="true" v-model="valueSearch" actionText="搜索"
+          @custom='search()' @change="change"> </u-search>
+        <!-- 没有输入搜索内容就提示 -->
+        <u-toast ref="uToast"></u-toast>
+      </view>
+    </u-sticky>
+
     <!-- 搜索建议提示 -->
     <view v-if="PromptSearchShow" class="searchAdvice">
       <button class="searchAdviceBtn" @click="searchToPage()">
@@ -92,9 +95,10 @@
                     <span>{{items.name}}</span>
                     <span v-show="index<item.ar.length-1">/</span>
                   </view>
-                 <view class="musname">
-                  <span>-</span>
-                  <span>{{item.al.name}}</span></view>
+                  <view class="musname">
+                    <span>-</span>
+                    <span>{{item.al.name}}</span>
+                  </view>
                 </view>
                 <view class="musicAuthor" v-for="(items,index) in item.alia" :key="idnex">{{items}}</view>
               </view>
@@ -110,13 +114,16 @@
 <script>
   import ModalPrompt from '../../components/modal/Modal.vue'
   import api from '../../common/api.js'
-  import{mapState,mapMutations} from'vuex'
+  import {
+    mapState,
+    mapMutations
+  } from 'vuex'
   export default {
     name: "serach",
     components: {
       ModalPrompt
     },
-  computed:{},
+    computed: {},
     data() {
       return {
         valueSearch: "",
@@ -133,22 +140,23 @@
         offset: 0, //偏移
         searchResults: [], //搜索结果列表
         showRestults: false, //显示搜索结果
+        isChange: true, //是否检测输入框变化
         customStyles: {
           //u-button按键样式
           height: 'auto',
           border: 'none',
           padding: '15rpx',
         },
-        musicName:'',
+        musicName: '',
       }
     },
     watch: {
-      searchHistoryRecord(newVal, oldVal) {    
+      searchHistoryRecord(newVal, oldVal) {
         if (newVal.length === 0) {
           this.show = false
           return
-        } 
-        this.showRestults?this.show=false:this.show=this.valueSearch==''
+        }
+        this.showRestults ? this.show = false : this.show = this.valueSearch == ''
       },
       searchAdvices(newVal, oldVal) {
         if (newVal === undefined) {
@@ -180,22 +188,24 @@
         this.toPage(this.valueSearch)
       },
       toPage(res) {
-        this.show = false
+        this.isChange = false
         this.valueSearch = res
         this.search()
       },
       change(res) {
-        this.show = false
-        this.showRestults = false
-        if (this.valueSearch == '') this.searchAdvices = []
-        api.getSearchAdvice(res).then(res => {
-          if (res.code === 200) {
-            this.show = false
-            this.searchAdvices = res.result.allMatch  
-          }
-        })
+        if (this.isChange) {
+           // this.PromptSearchShow=false
+          this.show = false
+          this.showRestults = false
+          if (this.valueSearch == '') this.searchAdvices = []
+          api.getSearchAdvice(res).then(res => {
+            if (res.code === 200) {
+              this.searchAdvices = res.result.allMatch
+            }
+          })
+        }
       },
-      
+
       HistoryRecord(index) {
         this.valueSearch = this.searchHistoryRecord[index]
       },
@@ -207,6 +217,7 @@
             this.searchHistoryRecord = [...this.searchHistoryRecord, this.valueSearch]
             this.saveSearchHistory()
           }
+            this.isChange=true //恢复建议提示
         })
       },
       search() {
@@ -216,35 +227,36 @@
             message: "请输入内容再次搜索",
           })
           return
-        } 
-          this.PromptSearchShow = false
-          this.searchAdvices = []
-          this.showRestults = true
-          this.searchResults = []
-          this.pageSize = 30
-          this.offset = 0
-          this.pageNum = 1
-          this.getorderList(this.valueSearch, this.offset, this.pageSize)
+        }
+        // 初始化
+        this.PromptSearchShow = false
+        this.searchAdvices = []
+        this.showRestults = true
+        this.searchResults = []
+        this.pageSize = 30
+        this.offset = 0
+        this.pageNum = 1
+        this.getorderList(this.valueSearch, this.offset, this.pageSize)
       },
       // 保存搜索记历录方法
       saveSearchHistory() {
         this.searchHistoryRecord = [...new Set([...this.searchHistoryRecord, this.valueSearch].reverse())]
         uni.setStorageSync(this.serarchKey, JSON.stringify(this.searchHistoryRecord))
       },
-      
+
       //跳转到播放页面 
-      toPlay(res){
-        this.$store.commit('SET_BACKGROUND_IMG',{
-          img:res.al.picUrl
+      toPlay(res) {
+        this.$store.commit('SET_BACKGROUND_IMG', {
+          img: res.al.picUrl
         })
-         let singer=[]
-         res.ar.forEach(item=>{
-         singer=[...singer,item.name]
-       })
-       singer=singer.join('/')
-       uni.navigateTo({
-         url:`/pages/playMusic/playMusic?id=${res.id}&musicName=${res.name}&singerName=${singer}`
-       })
+        let singer = []
+        res.ar.forEach(item => {
+          singer = [...singer, item.name]
+        })
+        singer = singer.join('/')
+        uni.navigateTo({
+          url: `/pages/playMusic/playMusic?id=${res.id}&musicName=${res.name}&singerName=${singer}`
+        })
       },
       // 调用子组件
       clearHistory() {
@@ -255,7 +267,7 @@
         if (!show) {
           this.showPrompt = show
           this.searchHistoryRecord = [],
-          uni.setStorageSync(this.serarchKey, '[]')
+            uni.setStorageSync(this.serarchKey, '[]')
         }
       },
       cancel(show) {
@@ -281,10 +293,7 @@
 </script>
 
 <style lang="less">
-  .searchTabr {
-    background-color: #fff;
-    padding: 25rpx 10rpx;
-  }
+  @import url('@/pages/search/searchTabr.less'); //搜索栏
 
   button::after {
     border: none;

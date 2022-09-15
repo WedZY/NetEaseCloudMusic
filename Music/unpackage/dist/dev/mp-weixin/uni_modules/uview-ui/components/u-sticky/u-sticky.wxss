@@ -1,0 +1,8 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.u-sticky.data-v-e18bd96e {
+  position: -webkit-sticky;
+  position: sticky;
+}
+

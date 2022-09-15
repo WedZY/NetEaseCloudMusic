@@ -1,6 +1,10 @@
 .searchTabr {
+  position: relative;
   background-color: #fff;
-  padding: 25rpx 10rpx;
+  width: 100%;
+  height: 100rpx;
+  box-sizing: border-box;
+  padding: 20rpx;
 }
 button::after {
   border: none;

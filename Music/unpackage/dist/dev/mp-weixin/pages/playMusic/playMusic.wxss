@@ -97,16 +97,16 @@
 .play-foot .slider_middle {
   width: 65%;
 }
-.play-foot .play_suspend .AudioImg {
+.play-foot .play_suspend .RightLast {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.play-foot .play_suspend .AudioImg .icon_play {
+.play-foot .play_suspend .RightLast .icon_play {
   width: 80rpx;
   height: 80rpx;
 }
-.play-foot .play_suspend .AudioImg .img_play {
+.play-foot .play_suspend .RightLast .img_play {
   width: 100rpx;
   height: 100rpx;
 }

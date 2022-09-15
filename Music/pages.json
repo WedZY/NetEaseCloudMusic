@@ -4,11 +4,14 @@
           "path":"pages/search/search"
     }, 
     {
-      "path":"pages/playMusic/playMusic"
-    },
-   
-    {
        "path":"pages/index/index"
+    },
+
+    {
+      "path":"pages/playMusic/playMusic",
+      "style": {
+         "navigationStyle": "custom"
+      }
     },
     {
       "path":"pages/searchResults/searchResults"
@@ -42,7 +45,6 @@
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "网易云音乐",
 		"navigationBarBackgroundColor": "#C20C0C",
-		"backgroundColor": "#F8F8F8",
-    "navigationStyle": "custom"
+		"backgroundColor": "#F8F8F8"
 	}
 }
